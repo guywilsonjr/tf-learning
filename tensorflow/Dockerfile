@@ -18,11 +18,14 @@ ENV TF_NEED_CLANG=1
 ENV TF_CUDA_COMPUTE_CAPABILITIES=7.5
 ENV CLANG_CUDA_COMPILER_PATH=/usr/lib/llvm-17/bin/clang
 ENV PYTHON_LIB_PATH /usr/local/lib/python3.12/dist-packages
-ENV CC_OPT_FLAGS="-march=native"
+ENV CC_OPT_FLAGS="-march=native -Ofast"
 COPY --from=get-tf /tensorflow/ /tensorflow/
 WORKDIR /tensorflow
 RUN ./configure
 RUN echo "build --copt=-Wno-error=unused-command-line-argument" >> .tf_configure.bazelrc
 
 FROM configure-tf as build-tf
-RUN bazel build //tensorflow/tools/pip_package:build_pip_package --config=opt --config=noaws --config=nogcp --config=nohdfs --config=avx_linux --config=mkl
+RUN bazel build //tensorflow/tools/pip_package:build_pip_package --config=opt --config=noaws --config=nogcp --config=nohdfs --config=avx_linux --config=mkl_threadpool
+
+RUN mkdir /tfo
+RUN bazel-bin/tensorflow/tools/pip_package/build_pip_package /tfo
