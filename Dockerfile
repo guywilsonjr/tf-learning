@@ -18,7 +18,7 @@ ENV TF_NEED_CLANG=1
 ENV TF_CUDA_COMPUTE_CAPABILITIES=7.5
 ENV CLANG_CUDA_COMPILER_PATH=/usr/lib/llvm-17/bin/clang
 ENV PYTHON_LIB_PATH /usr/local/lib/python3.12/dist-packages
-ENV CC_OPT_FLAGS="-march=x86-64 -maes -mavx -mavx2 -mavxvnni -mmmx -mpclmul -mpopcnt -msse -msse2 -msse3 -msse4.1 -msse4.2 -mssse3 -mf16c -mfma"
+ENV CC_OPT_FLAGS="-march=x86-64 -mkl -maes -mavx -mavx2 -mavxvnni -mmmx -mpclmul -mpopcnt -msse -msse2 -msse3 -msse4.1 -msse4.2 -mssse3 -mf16c -mfma"
 COPY --from=get-tf /tensorflow/ /tensorflow/
 WORKDIR /tensorflow
 RUN ./configure
