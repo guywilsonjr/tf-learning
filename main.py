@@ -34,7 +34,7 @@ def print_hi(name):
     model.fit(X, y, epochs=300, validation_split=0.25, verbose=0)  # Train for 500 epochs, verbose=0 for silent training
 
     # Make a prediction
-    print(model.predict([100]))
+    print(model.predict(tf.Variable([100])))
 
 
 # Press the green button in the gutter to run the script.
