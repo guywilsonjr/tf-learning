@@ -29,3 +29,5 @@ RUN bazel build //tensorflow/tools/pip_package:build_pip_package --config=opt --
 
 RUN mkdir /tfo
 RUN bazel-bin/tensorflow/tools/pip_package/build_pip_package /tfo
+FROM build-tf as cleanup
+RUN rm -rf /tmp/* && rm -rf /root/.cache && rm -rf /root/*
