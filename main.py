@@ -21,7 +21,7 @@ def print_hi(name):
     opt = tf.keras.optimizers.SGD(learning_rate=0.01)
 
     # Compile the model
-    model.compile(optimizer='sgd', loss='mean_squared_error')
+    model.compile(optimizer='rmsprop', loss='mean_squared_error')
 
     # Example input and output
     # Let's assume your task is to learn the relationship y = 2x - 1
@@ -34,7 +34,7 @@ def print_hi(name):
     model.fit(X, y, epochs=300, validation_split=0.25, verbose=0)  # Train for 500 epochs, verbose=0 for silent training
 
     # Make a prediction
-    print(model.predict(tf.Variable([100.0])))
+    print(model.predict([100]))
 
 
 # Press the green button in the gutter to run the script.
